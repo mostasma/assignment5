@@ -19,18 +19,26 @@
       </span>  
     </a>
     <div class="flex items-center gap-4">
-      <div class="flex items-center gap-3 px-10 py-2 rounded-full bg-green-50">
-        <i class="fa-solid fa-heart text-pink-600"></i>
+      <!-- Heart -->
+      <div class="flex items-center gap-2 px-10 py-4 rounded-full bg-green-50">
+        <img src="assets/heart.png" alt="Heart" class="h-5 w-5">
         <span id="heartCount">0</span>
       </div>
-      <div class="flex items-center gap-3 px-10 py-2 rounded-full  bg-green-50"> 
+    
+      <!-- Coins -->
+      <div class="flex items-center gap-2 px-10 py-4 rounded-full bg-green-50">
         <span id="coinCount">100</span>
-        <i class="fa-solid fa-coins text-yellow-600"></i>
+        <img src="assets/coin.png" alt="Coins" class="h-5 w-5">
+       
       </div>
-      <div class="flex items-center gap-3 px-10 py-2 rounded-full border border-green-200 bg-green-600">
-        <i class="fa-regular fa-copy text-green-600"></i>
+    
+      <!-- Copy -->
+      <div class="flex items-center gap-2 px-10 py-4 rounded-full bg-green-600">
+        
         <span id="copyCount">0 copy</span>
       </div>
+    </div>
+    
     </div>
   </div>
 </header>
@@ -64,69 +72,80 @@
 <script>
   // ---------- Data ----------//
   const services = [
-    { id:'nat-emergency', 
-    icon:'🛡️',
-    name:'National Emergency Number',
-    localName:'national emergrncy', 
-    number:'999', 
-    category:'All' 
+  { 
+    id: 'nat-emergency', 
+    icon: 'assets/emergency.png',   // your own image
+    name: 'National Emergency Number',
+    localName: 'National Emergency',
+    number: '999',
+    category: 'All'
   },
-    { id:'police', 
-    icon:'👮', 
-    name:'Police Helpline Number', 
-    localName:'police', 
-    number:'999', 
-    category:'Police' 
+  { 
+    id: 'police', 
+    icon: 'assets/police.png',      // your own image
+    name: 'Police Helpline Number',
+    localName: 'Police',
+    number: '999',
+    category: 'Police'
   },
-    { id:'fire', 
-    icon:'🚒', 
-    name:'Fire Service Number', 
-    localName:'Fire services',
-    number:'999', 
-    category:'Fire' 
+  { 
+    id: 'fire', 
+    icon: 'assets/emergency.png',        // your own image
+    name: 'Fire Service Number',
+    localName: 'Fire Service',
+    number: '999',
+    category: 'Fire'
   },
-    { id:'ambulance', 
-    icon:'🚑', 
-    name:'Ambulance Service', 
-    localName:'Ambulance', 
-    number:'1994-9999999', 
-    category:'Health' 
+  { 
+    id: 'ambulance', 
+    icon: 'assets/ambulance.png',   // your own image
+    name: 'Ambulance Service',
+    localName: 'Ambulance',
+    number: '102',
+    category: 'Health'
   },
-    { id:'women-child', 
-    icon:'👩‍👧', 
-    name:'Women & Child Helpline', 
-    localName:'Woman and children helpline', 
-    number:'109', 
-    category:'Help'  
+  { 
+    id: 'women-child', 
+    icon: 'assets/emergency.png',       // your own image
+    name: 'Women & Child Helpline',
+    localName: 'Women & Child Helpline',
+    number: '109',
+    category: 'Help'
   },
-    { id:'anti-corruption', 
-    icon:'🛡️', 
-    name:'Anti-Corruption Helpline', 
-    localName:'Anti-curreption', 
-    number:'106', 
-    category:'Govt.' },
+  { 
+    id: 'anti-corruption', 
+    icon: 'assets/emergency.png',  // your own image
+    name: 'Anti-Corruption Helpline',
+    localName: 'Anti-Corruption',
+    number: '106',
+    category: 'Govt.'
+  },
+  { 
+    id: 'electricity', 
+    icon: 'assets/emergency.png', // your own image
+    name: 'Electricity Helpline',
+    localName: 'Electricity Outage',
+    number: '16216',
+    category: 'Electricity'
+  },
+  { 
+    id: 'brac', 
+    icon: 'assets/emergency.png',        // your own image
+    name: 'Brac Helpline',
+    localName: 'Brac',
+    number: '16445',
+    category: 'NGO'
+  },
+  { 
+    id: 'railway', 
+    icon: 'assets/emergency.png',       // your own image
+    name: 'Bangladesh Railway Helpline',
+    localName: 'Bangladesh Railway',
+    number: '163',
+    category: 'Travel'
+  }
+];
 
-    { id:'electricity', 
-    icon:'💡', 
-    name:'Electricity Helpline', 
-    localName:'Electricity', 
-    number:'16216', 
-    category:'Electricity' },
-
-    { id:'brac', 
-    icon:'🏥', 
-    name:'Brac Helpline', 
-    localName:'Brack', 
-    number:'16465', 
-    category:'NGO' },
-
-    { id:'rail', 
-    icon:'🚆', 
-    name:'Bangladesh Railway Helpline', 
-    localName:'Bangladesh Railway', 
-    number:'163', 
-    category:'Travel' }
-  ];
 
   // ---------- State ----------//
   let coins = 100;
@@ -152,27 +171,47 @@
 
   // ---------- Render Cards ----------//
   function renderCards() {
-    cardsEl.innerHTML = services.map(s => `
-      <article class="bg-white border border-gray-200 rounded-lg p-4 shadow relative">
-        <button class="fav absolute top-2 left-2 w-8 h-8 flex items-center justify-center text-pink-600"><i class="fa-solid fa-heart"></i></button>
-        <div class="text-3xl text-center mb-2">${s.icon}</div>
-        <div class="font-bold">${s.name}</div>
-        <div class="text-gray-600 text-sm">${s.localName}</div>
-        <div class="font-semibold text-lg mt-1">${s.number}</div>
-        <span class="text-xs bg-gray-100 border border-gray-200 rounded-full px-2 py-0.5 mt-1 inline-block">${s.category}</span>
-        <div class="grid grid-cols-2 gap-2 mt-3">
-          <button class="btn ghost copy-btn flex items-center justify-center gap-1 px-2 py-1 border border-gray-300 rounded">
-            <i class="fa-regular fa-copy"></i> Copy
-          </button>
-          <button class="btn primary call-btn flex items-center justify-center gap-1 px-2 py-1 rounded bg-green-500 text-white">
-            <i class="fa-solid fa-phone"></i> Call
-          </button>
-        </div>
-      </article>
-    `).join('');
-  }
+  const cardsEl = document.getElementById("cards");
 
-  renderCards();
+  cardsEl.innerHTML = services.map(s => `
+    <article class="card bg-white border border-gray-200 rounded-lg p-4 shadow relative" data-id="${s.id}">
+      
+      <!-- Service Icon -->
+      <div class="flex items-center gap-3 mb-2">
+        <img src="${s.icon}" alt="${s.name}" class="h-10 w-10 rounded-md">
+        <button class="fav ml-auto">
+          <img src="assets/heart.png" alt="Favorite" class="h-5 w-5">
+        </button>
+      </div>
+
+      <!-- Service Info -->
+      <div class="name font-bold text-lg">${s.name}</div>
+      <div class="local text-gray-600 text-sm">${s.localName}</div>
+      <div class="number font-semibold text-xl mt-1">${s.number}</div>
+
+      <!-- Category -->
+      <span class="badge inline-block mt-2 px-2 py-0.5 text-xs bg-gray-100 border border-gray-200 rounded-full">
+        ${s.category}
+      </span>
+
+      <!-- Actions -->
+      <div class="actions flex gap-2 mt-4">
+        <button class="flex-1 flex items-center justify-center gap-1 px-3 py-2 border border-gray-300 rounded copy-btn" 
+                data-number="${s.number}" data-name="${s.name}">
+          <img src="assets/copy.png" alt="Copy" class="h-4 w-4"> Copy
+        </button>
+
+        <button class="flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded bg-green-500 text-white call-btn"
+                data-number="${s.number}" data-name="${s.name}">
+          <img src="assets/call.png" alt="Call" class="h-4 w-4"> Call
+        </button>
+      </div>
+    </article>
+  `).join('');
+}
+
+renderCards();
+
 
   // ---------- Event Delegation ----------
   cardsEl.addEventListener('click', async (e) => {
